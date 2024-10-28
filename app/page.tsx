@@ -37,7 +37,7 @@ export default function Home() {
     <div className="flex flex-col min-h-screen">
       <main className="flex-1 bg-gradient-to-b from-[#1A202C] to-[#566A92]">
         <div className="container mx-auto p-4 sm:p-6 flex flex-col gap-4 h-full">
-          <h1 className="text-white text-5xl">RaidGuild Cohort Token Dashboard</h1>
+          <h1 className="text-white text-5xl font-serif">RaidGuild Cohort Token Dashboard</h1>
           <UserWallet tokens={tokens} />
           <div className="grid grid-cols-3 gap-4 auto-rows-[240px]">
             <TokenSupply tokens={tokens} />
