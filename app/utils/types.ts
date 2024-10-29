@@ -1,24 +1,24 @@
 export interface Token {
-  id: string;
-  symbol: string;
-  name: string;
-  decimals: number;
-  totalSupply: string;
-  volume: string;
+    id: string;
+    symbol: string;
+    name: string;
+    decimals: number;
+    totalSupply: string;
+    volume: string;
 }
 
-export interface TokenBalance {
-  memberAddress: string;
-  shares: number;
+export interface DaoMember {
+    memberAddress: string;
+    shares: number;
 }
 
 export interface TokenBalanceResponse {
-  members: [TokenBalance];
+    members: [DaoMember];
 }
 export interface TokenResponse {
-  token: Token;
+    token: Token;
 }
 
-export interface FormattedTokenBalance extends TokenBalance {
-  formattedAmount: number;
+export interface FormattedMember extends DaoMember {
+    formattedAmount: number;
 }
