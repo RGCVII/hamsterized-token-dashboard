@@ -1,7 +1,8 @@
 ## Getting Started
 
--   `cp .env.example .env`
--   Edit `.env` with your keys
+cp .env.example .env`
+
+Edit `.env` with your keys
 
 `npm install`
 
