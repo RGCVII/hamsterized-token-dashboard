@@ -104,7 +104,15 @@ const Providers: FC<{
     return (
         <WagmiProvider config={WalletConfig}>
             <QueryClientProvider client={queryClient}>
-                <RainbowKitProvider theme={midnightTheme()}>
+                <RainbowKitProvider
+                  theme={midnightTheme({
+                    accentColor: '#2A9D90',
+                    accentColorForeground: 'white',
+                    borderRadius: 'small',
+                    fontStack: 'system',
+                    overlayBlur: 'small',
+                  })}
+                >
                     {children}
                 </RainbowKitProvider>
             </QueryClientProvider>

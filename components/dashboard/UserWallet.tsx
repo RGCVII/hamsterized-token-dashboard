@@ -1,12 +1,10 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import Image from "next/image";
-import { useAccount } from "wagmi";
 import React from "react";
 import { Token } from "@/app/page";
 import { Card, CardContent } from "@/components/ui/card";
-import { Copy, ChevronDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -23,14 +21,14 @@ const ClientWalletButton = dynamic(
 
 const UserWallet = ({ tokens }: { tokens: Token[] }) => {
   return (
-    <Card className="bg-white/10 backdrop-blur-sm border-gray-600 w-full">
+    <Card className="bg-gradient-to-l from-[#262f41] to-[#475778] backdrop-blur-sm border-white w-full">
       <CardContent className="p-4">
         <div className="flex items-center justify-between">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
                 variant="secondary"
-                className="h-12 px-6 flex items-center gap-2"
+                className="h-12 px-6 flex items-center gap-2 bg-rg-aqua text-white hover:text-slate-600 font-bold"
               >
                 {tokens[0].symbol}
                 <ChevronDown className="h-4 w-4" />
@@ -56,16 +54,5 @@ const UserWallet = ({ tokens }: { tokens: Token[] }) => {
     </Card>
   )
 }
-
-// const UserWallet = () => {
-//   const { isConnected } = useAccount();
-//   return (
-//     <>
-//       {/* <ClientWalletButton />
-//       {isConnected && <User /> } */}
-//       <User />
-//     </>
-//   )
-// }
 
 export { UserWallet };

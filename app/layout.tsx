@@ -35,8 +35,7 @@ export default async function RootLayout({
 
     return (
         <html lang="en">
-            <body className="font-family: 'Plus Jakarta Sans Variable', sans-serif">
-            {/* <body className="font-family: 'Space Mono', monospace"> */}
+            <body>
                 <Providers initialConfig={initialConfig}>{children}</Providers>
             </body>
         </html>

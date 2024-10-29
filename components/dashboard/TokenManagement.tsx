@@ -3,9 +3,9 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
 const TokenManagement = () => {
   return (
-    <Card className="bg-white/10 backdrop-blur-sm border-gray-600 row-span-2">
-      <CardHeader>
-        <CardTitle className="text-gray-200">Token Management</CardTitle>
+    <Card className="bg-gradient-to-b from-[#262f41] to-[#475778] backdrop-blur-sm border-white row-span-2">
+      <CardHeader className="flex flex-row items-center justify-between border-b border-white p-5">
+        <CardTitle className="w-full text-2xl font-serif text-rg-red">Token Management</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
