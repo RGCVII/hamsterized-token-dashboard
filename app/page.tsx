@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { UserWallet } from "@/components/dashboard/UserWallet";
 import { TokenSupply } from "@/components/dashboard/TokenSupply";
@@ -5,7 +7,11 @@ import { TokenLore } from "@/components/dashboard/TokenLore";
 import { TokenManagement } from "@/components/dashboard/TokenManagement";
 import { Leaderboard } from "@/components/dashboard/Leaderboard";
 import { CohortProjects } from "@/components/dashboard/CohortProjects";
+import { useTokenBalances, useTokenInfo } from "./hooks/useTokenData";
 
+const TOKEN_ADDRESS = "0x11dc980faf34a1d082ae8a6a883db3a950a3c6e8";
+const DAO_ADDRESS = "0x4d5a5b4a679b10038e1677c84cb675d10d29fffd";
+const TOP_HOLDERS_LIMIT = 10;
 export interface Token {
     name: string;
     symbol: string;
@@ -26,6 +32,46 @@ export interface TokenHolder {
 }
 
 export default function Home() {
+
+  const {
+    data: tokenInfo,
+    isLoading: isTokenLoading,
+    error: tokenError,
+  } = useTokenInfo(TOKEN_ADDRESS);
+
+  const {
+    data: topHolders,
+    isLoading: isBalancesLoading,
+    error: balancesError,
+  } = useTokenBalances(DAO_ADDRESS, tokenInfo, TOP_HOLDERS_LIMIT);
+
+  if (isTokenLoading || isBalancesLoading) {
+    return <div className="p-4">Loading token information...</div>;
+  }
+
+  if (tokenError) {
+    return (
+      <div className="p-4 text-red-500">
+        Error loading token: {tokenError.message}
+      </div>
+    );
+  }
+
+  if (balancesError) {
+    return (
+      <div className="p-4 text-red-500">
+        Error loading token: {balancesError.message}
+      </div>
+    );
+  }
+
+  if (!tokenInfo) {
+    return <div className="p-4">No token information available</div>;
+  }
+
+  console.log(topHolders, tokenInfo);
+
+  
     const selectedTokenSymbol = "RGCVII";
 
     const tokens: Token[] = [
