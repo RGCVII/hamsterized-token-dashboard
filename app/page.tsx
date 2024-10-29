@@ -21,7 +21,6 @@ export interface Token {
     marketCap: string;
     totalSupply: string;
     contractAddress: string;
-    description: string;
 }
 
 export interface TokenHolder {
@@ -84,8 +83,6 @@ export default function Home() {
             marketCap: "789.1M",
             totalSupply: "1,000,000,000",
             contractAddress: "0x68f2...abc",
-            description:
-                "In a land ruled by tiny paws, the hamsters empire. With bravery and wit, they sail the Uniswap seas, conquer the Dune Desert, and protect their kingdom through DAOhaus. Join them on their quest to defeat Moloch! In a land ruled by tiny paws, the hamsters empire. With bravery and wit, they sail the Uniswap seas, conquer the Dune Desert, and protect their kingdom through DAOhaus. Join them on their quest to defeat Moloch!",
         },
     ];
     const tokenHolders: TokenHolder[] = [
@@ -137,7 +134,7 @@ export default function Home() {
                     <UserWallet tokens={tokens} />
                     <div className="grid grid-cols-3 gap-4 auto-rows-[400px]">
                         <TokenSupply tokens={tokens} />
-                        <TokenLore tokens={tokens} />
+                        <TokenLore />
                         <TokenManagement />
                         <Leaderboard
                             selectedToken={selectedTokenSymbol}
