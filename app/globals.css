@@ -3,7 +3,8 @@
 @tailwind utilities;
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  /* font-family: 'Space Mono', monospace; */
+  font-family: 'Plus Jakarta Sans Variable', sans;
 }
 
 @layer utilities {

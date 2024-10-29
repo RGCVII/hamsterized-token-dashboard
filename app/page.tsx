@@ -29,17 +29,17 @@ export default function Home() {
       marketCap: "789.1M",
       totalSupply: "1,000,000,000",
       contractAddress: "0x68f2...abc",
-      description: "In a land",
+      description: "In a land ruled by tiny paws, the hamsters empire. With bravery and wit, they sail the Uniswap seas, conquer the Dune Desert, and protect their kingdom through DAOhaus. Join them on their quest to defeat Moloch! In a land ruled by tiny paws, the hamsters empire. With bravery and wit, they sail the Uniswap seas, conquer the Dune Desert, and protect their kingdom through DAOhaus. Join them on their quest to defeat Moloch!",
     },
   ];
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <main className="flex-1 bg-gradient-to-b from-[#1A202C] to-[#566A92]">
+    <div className="flex flex-col min-h-screen text-white">
+      <main className="flex-1 bg-gradient-to-r from-[#1A202C] to-[#40557b]">
         <div className="container mx-auto p-4 sm:p-6 flex flex-col gap-4 h-full">
-          <h1 className="text-white text-5xl">RaidGuild Cohort Token Dashboard</h1>
+          <h1 className="text-5xl text-rg-red font-serif my-8">RGC Token Dashboard</h1>
           <UserWallet tokens={tokens} />
-          <div className="grid grid-cols-3 gap-4 auto-rows-[240px]">
+          <div className="grid grid-cols-3 gap-4 auto-rows-[400px]">
             <TokenSupply tokens={tokens} />
             <TokenLore tokens={tokens} />
             <TokenManagement />
@@ -50,7 +50,7 @@ export default function Home() {
         </div>
       </main>
 
-      <footer className="py-4 flex justify-center">
+      <footer className="py-4 flex justify-center bg-[#1A202C]">
         <a
           className="flex items-center gap-2 hover:underline hover:underline-offset-4"
           href="https://app.charmverse.io/raidguild-cohort-season-7/hamsterized-token-dashboard-0771957381100139"
