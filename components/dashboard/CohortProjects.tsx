@@ -44,7 +44,7 @@ const CohortProjects = () => {
   ]
 
   return (
-    <Card className="col-span-2 bg-gradient-to-t from-[#262f41] to-[#475778] backdrop-blur-sm border-white pb-4 mb-20">
+    <Card className="col-span-2 bg-gradient-to-t from-[#262f41] to-[#475778] backdrop-blur-sm border-white">
       <CardHeader className="flex flex-row items-center justify-between border-b border-white p-5">
         <CardTitle className="w-full text-2xl font-serif text-rg-red">CohortVII Projects</CardTitle>
       </CardHeader>

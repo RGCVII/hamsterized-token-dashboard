@@ -130,8 +130,8 @@ export default function Home() {
     return (
         <div className="flex flex-col min-h-screen text-white">
             <main className="flex-1 bg-gradient-to-r from-[#1A202C] to-[#40557b]">
-                <div className="container mx-auto p-4 sm:p-6 flex flex-col gap-4 h-full">
-                    <h1 className="text-5xl text-rg-red font-serif my-8">
+                <div className="container mx-auto flex flex-col gap-4 h-full">
+                    <h1 className="text-6xl text-rg-red font-serif mt-24 mb-8">
                         RGC Token Dashboard
                     </h1>
                     <UserWallet tokens={tokens} />
@@ -148,21 +148,30 @@ export default function Home() {
                 </div>
             </main>
 
-            <footer className="py-4 flex justify-center bg-[#1A202C]">
+            <footer className="pb-12 pt-32 flex justify-center items-center gap-32 bg-[#1A202C]">
+                <div className="flex flex-row gap-2">
+                  <p>Made with</p>
+                  <Image
+                      aria-hidden
+                      src="/RG-logo.png"
+                      alt="Raid Guild icon"
+                      width={28}
+                      height={28}
+                  />
+                  <p>by RaidGuild CohortVII</p>
+                </div>
                 <a
-                    className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-                    href="https://app.charmverse.io/raidguild-cohort-season-7/hamsterized-token-dashboard-0771957381100139"
+                    href="https://github.com/RGCVII/hamsterized-token-dashboard"
                     target="_blank"
                     rel="noopener noreferrer"
                 >
                     <Image
                         aria-hidden
-                        src="https://nextjs.org/icons/globe.svg"
-                        alt="Globe icon"
-                        width={16}
-                        height={16}
+                        src="/Github_Invertocat_Light.png"
+                        alt="Github icon"
+                        width={32}
+                        height={32}
                     />
-                    Project Details →
                 </a>
             </footer>
         </div>
