@@ -24,7 +24,7 @@ const TokenLore = ({ tokens }: { tokens: Token[] }) => {
             </div>
             <div className="h-[120px] w-[100px] border border-white rounded-sm py-8 px-3">
               <p className="text-base text-rg-red font-serif">DAOHaus</p>
-              <p className="text-xs text-white">the hamsters' magical DAO</p>
+              <p className="text-xs text-white">the hamsters&apos; magical DAO</p>
             </div>
           </div>
         </div>
