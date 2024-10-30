@@ -12,6 +12,7 @@ import { useTokenBalances, useTokenInfo } from "./hooks/useTokenData";
 const TOKEN_ADDRESS = "0x11dc980faf34a1d082ae8a6a883db3a950a3c6e8";
 const DAO_ADDRESS = "0x4d5a5b4a679b10038e1677c84cb675d10d29fffd";
 const TOP_HOLDERS_LIMIT = 10;
+
 export interface Token {
     name: string;
     symbol: string;
@@ -21,6 +22,11 @@ export interface Token {
     marketCap: string;
     totalSupply: string;
     contractAddress: string;
+    description: string;
+    availableHoldings: number;
+    staked: number;
+    unstaked: number;
+    apr: number;
 }
 
 export interface TokenHolder {
@@ -31,46 +37,42 @@ export interface TokenHolder {
 }
 
 export default function Home() {
+    const {
+        data: tokenInfo,
+        isLoading: isTokenLoading,
+        error: tokenError,
+    } = useTokenInfo(TOKEN_ADDRESS);
 
-  const {
-    data: tokenInfo,
-    isLoading: isTokenLoading,
-    error: tokenError,
-  } = useTokenInfo(TOKEN_ADDRESS);
+    const {
+        data: topHolders,
+        isLoading: isBalancesLoading,
+        error: balancesError,
+    } = useTokenBalances(DAO_ADDRESS, tokenInfo, TOP_HOLDERS_LIMIT);
 
-  const {
-    data: topHolders,
-    isLoading: isBalancesLoading,
-    error: balancesError,
-  } = useTokenBalances(DAO_ADDRESS, tokenInfo, TOP_HOLDERS_LIMIT);
+    if (isTokenLoading || isBalancesLoading) {
+        return <div className="p-4">Loading token information...</div>;
+    }
 
-  if (isTokenLoading || isBalancesLoading) {
-    return <div className="p-4">Loading token information...</div>;
-  }
+    if (tokenError) {
+        return (
+            <div className="p-4 text-red-500">
+                Error loading token: {tokenError.message}
+            </div>
+        );
+    }
 
-  if (tokenError) {
-    return (
-      <div className="p-4 text-red-500">
-        Error loading token: {tokenError.message}
-      </div>
-    );
-  }
+    if (balancesError) {
+        return (
+            <div className="p-4 text-red-500">
+                Error loading token: {balancesError.message}
+            </div>
+        );
+    }
 
-  if (balancesError) {
-    return (
-      <div className="p-4 text-red-500">
-        Error loading token: {balancesError.message}
-      </div>
-    );
-  }
+    if (!tokenInfo) {
+        return <div className="p-4">No token information available</div>;
+    }
 
-  if (!tokenInfo) {
-    return <div className="p-4">No token information available</div>;
-  }
-
-  console.log(topHolders, tokenInfo);
-
-  
     const selectedTokenSymbol = "RGCVII";
 
     const tokens: Token[] = [
@@ -83,6 +85,12 @@ export default function Home() {
             marketCap: "789.1M",
             totalSupply: "1,000,000,000",
             contractAddress: "0x68f2...abc",
+            description:
+                "In a land ruled by tiny paws, the hamsters empire. With bravery and wit, they sail the Uniswap seas, conquer the Dune Desert, and protect their kingdom through DAOhaus. Join them on their quest to defeat Moloch! In a land ruled by tiny paws, the hamsters empire. With bravery and wit, they sail the Uniswap seas, conquer the Dune Desert, and protect their kingdom through DAOhaus. Join them on their quest to defeat Moloch!",
+            staked: 0,
+            unstaked: 0,
+            apr: 0,
+            availableHoldings: 0,
         },
     ];
     const tokenHolders: TokenHolder[] = [
@@ -135,7 +143,7 @@ export default function Home() {
                     <div className="grid grid-cols-3 gap-4 auto-rows-[400px]">
                         <TokenSupply tokens={tokens} />
                         <TokenLore />
-                        <TokenManagement />
+                        <TokenManagement token={tokens[0]} />
                         <Leaderboard
                             selectedToken={selectedTokenSymbol}
                             tokenHolders={tokenHolders}
@@ -147,15 +155,15 @@ export default function Home() {
 
             <footer className="pb-12 pt-32 flex justify-center items-center gap-32 bg-[#1A202C]">
                 <div className="flex flex-row gap-2">
-                  <p>Made with</p>
-                  <Image
-                      aria-hidden
-                      src="/RG-logo.png"
-                      alt="Raid Guild icon"
-                      width={28}
-                      height={28}
-                  />
-                  <p>by RaidGuild CohortVII</p>
+                    <p>Made with</p>
+                    <Image
+                        aria-hidden
+                        src="/RG-logo.png"
+                        alt="Raid Guild icon"
+                        width={28}
+                        height={28}
+                    />
+                    <p>by RaidGuild CohortVII</p>
                 </div>
                 <a
                     href="https://github.com/RGCVII/hamsterized-token-dashboard"
