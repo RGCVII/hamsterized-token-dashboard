@@ -52,7 +52,7 @@ export default function Home() {
     if (isTokenLoading || isBalancesLoading) {
         return <div className="p-4">Loading token information...</div>;
     }
-
+    console.log(topHolders, tokenInfo);
     if (tokenError) {
         return (
             <div className="p-4 text-red-500">

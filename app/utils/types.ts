@@ -12,7 +12,7 @@ export interface DaoMember {
     shares: number;
 }
 
-export interface TokenBalanceResponse {
+export interface DaoMembersResponse {
     members: [DaoMember];
 }
 export interface TokenResponse {
