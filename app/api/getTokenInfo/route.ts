@@ -15,6 +15,7 @@ const query = gql`
             name
             decimals
             derivedETH
+            volume
         }
     }
 `;
