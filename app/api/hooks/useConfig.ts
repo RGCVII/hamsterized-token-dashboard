@@ -4,6 +4,7 @@ interface Config {
     walletConnectId: string;
     baseRpc: string;
     baseTestnetRpc: string;
+    graphApiKeyMainnet: string;
 }
 
 export function useConfig() {
