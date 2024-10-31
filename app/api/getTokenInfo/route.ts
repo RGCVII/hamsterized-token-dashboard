@@ -30,9 +30,6 @@ export async function GET(request: Request) {
         );
     }
 
-    console.log(`Fetching token info for address: ${tokenAddress}`);
-    console.log(`GRAPH_UNISWAP_API_URL: ${GRAPH_UNISWAP_API_URL}`);
-
     try {
         const response: TokenResponse = await graphqlRequest(
             GRAPH_UNISWAP_API_URL,
