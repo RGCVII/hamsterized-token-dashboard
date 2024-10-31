@@ -28,10 +28,10 @@ export interface DaoMember {
 export interface Dao {
     totalShares: number;
     proposalCount: string;
+    members: DaoMember[];
 }
 export interface DaoResponse {
     dao: Dao;
-    members: DaoMember[];
 }
 export interface TokenResponse {
     bundle: Bundle;

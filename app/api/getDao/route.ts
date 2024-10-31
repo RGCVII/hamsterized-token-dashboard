@@ -10,13 +10,13 @@ const query = gql`
         dao(id: $daoAddress) {
             totalShares
             proposalCount
-        }
-        members {
-            votes {
-                id
+            members {
+                votes {
+                    id
+                }
+                memberAddress
+                shares
             }
-            memberAddress
-            shares
         }
     }
 `;
@@ -49,7 +49,7 @@ export async function GET(request: Request) {
             );
         }
 
-        return NextResponse.json(response);
+        return NextResponse.json(response.dao);
     } catch (error) {
         console.error("Error fetching DAO info:", error);
         if (error instanceof Error) {

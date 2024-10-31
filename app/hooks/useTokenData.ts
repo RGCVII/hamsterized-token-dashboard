@@ -1,9 +1,9 @@
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import {
     TokenResponse,
-    DaoResponse,
     FormattedMember,
     FormattedDao,
+    Dao,
 } from "../utils/types";
 import { formatTokenAmount } from "../utils/formatters";
 
@@ -45,23 +45,21 @@ export const useDaoData = (
             if (!response.ok) {
                 throw new Error("Failed to fetch DAO info");
             }
-            const daoData: DaoResponse = await response.json();
-
-            const formattedMembers: FormattedMember[] = daoData.members.map(
+            const dao: Dao = await response.json();
+            const formattedMembers: FormattedMember[] = dao.members.map(
                 (member) => ({
                     ...member,
-                    votingParticipation: `${member.votes.length}/${daoData.dao.proposalCount}`,
+                    votingParticipation: `${member.votes.length}/${dao.proposalCount}`,
                     formattedAmount: formatTokenAmount(
                         member.shares,
                         tokenData.token.decimals
                     ),
                 })
             );
-
             return {
-                ...daoData.dao,
+                ...dao,
                 formattedTotalShares: formatTokenAmount(
-                    daoData.dao.totalShares,
+                    dao.totalShares,
                     tokenData.token.decimals
                 ),
                 members: formattedMembers
