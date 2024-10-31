@@ -65,7 +65,6 @@ export default function Dashboard() {
             availableHoldings: 0,
         },
     ];
-    console.log(tokens);
 
     return (
         <div className="grid grid-cols-3 gap-4 auto-rows-[400px]">
