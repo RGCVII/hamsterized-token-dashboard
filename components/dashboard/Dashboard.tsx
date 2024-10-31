@@ -8,7 +8,7 @@ import { LoadingIndicator } from "@/components/ui/LoadingIndicator";
 import { TokenInfo } from "../../app/utils/types";
 import { useDaoData, useTokenData } from "../../app/hooks/useTokenData";
 
-const TOKEN_ADDRESS = "0x11dc980faf34a1d082ae8a6a883db3a950a3c6e8";
+export const TOKEN_ADDRESS = "0x11dc980faf34a1d082ae8a6a883db3a950a3c6e8";
 const DAO_ADDRESS = "0x4d5a5b4a679b10038e1677c84cb675d10d29fffd";
 const TOP_HOLDERS_LIMIT = 10;
 
@@ -88,9 +88,29 @@ export default function Dashboard() {
         },
     ];
 
+    // FIXME: hack for now until we have real data
+    const totalSupply = daoData?.formattedTotalShares
+        ? parseInt(daoData.formattedTotalShares, 10)
+        : 0;
+
+    const burned = totalSupply * 0.3,
+        locked = totalSupply * 0.2;
+
+    const unburned = totalSupply - burned,
+        unlocked = totalSupply - locked;
+
+    const supplyChartData = {
+        burned: [{ burned }, { unburned }],
+        locked: [{ locked }, { unlocked }],
+    };
+
     return (
         <div className="grid grid-cols-3 gap-4 auto-rows-[400px]">
-            <TokenSupply tokens={tokens} />
+            <TokenSupply
+                tokens={tokens}
+                daoData={daoData}
+                chartData={supplyChartData}
+            />
             <TokenLore />
             <TokenManagement token={tokens[0]} />
             <Leaderboard
@@ -98,6 +118,5 @@ export default function Dashboard() {
                 tokenHolders={daoData?.members}
             />
         </div>
-        
     );
 }
