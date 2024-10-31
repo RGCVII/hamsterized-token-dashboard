@@ -2,7 +2,7 @@
 
 import {
     RainbowKitProvider,
-    midnightTheme,
+    lightTheme,
     connectorsForWallets,
 } from "@rainbow-me/rainbowkit";
 import "@rainbow-me/rainbowkit/styles.css";
@@ -105,7 +105,7 @@ const Providers: FC<{
         <WagmiProvider config={WalletConfig}>
             <QueryClientProvider client={queryClient}>
                 <RainbowKitProvider
-                  theme={midnightTheme({
+                  theme={lightTheme({
                     accentColor: '#2A9D90',
                     accentColorForeground: 'white',
                     borderRadius: 'small',

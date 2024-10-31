@@ -1,11 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import { TokenSupply } from "@/components/dashboard/TokenSupply";
 import { TokenLore } from "@/components/dashboard/TokenLore";
 import { TokenManagement } from "@/components/dashboard/TokenManagement";
 import { Leaderboard } from "@/components/dashboard/Leaderboard";
-import { CohortProjects } from "@/components/dashboard/CohortProjects";
 import { LoadingIndicator } from "@/components/ui/LoadingIndicator";
 import { TokenInfo } from "../../app/utils/types";
 import { useDaoData, useTokenData } from "../../app/hooks/useTokenData";
