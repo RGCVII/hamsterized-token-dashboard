@@ -1,6 +1,6 @@
 import { gql, request as graphqlRequest } from "graphql-request";
 import { NextResponse } from "next/server";
-import { DaoResponse, TokenResponse } from "../../utils/types";
+import { TokenResponse } from "../../utils/types";
 
 const GRAPH_UNISWAP_API_URL = `https://gateway.thegraph.com/api/${process.env.GRAPH_API_KEY_MAINNET}/subgraphs/id/GqzP4Xaehti8KSfQmv3ZctFSjnSUYZ4En5NRsiTbvZpz`;
 

@@ -6,7 +6,6 @@ import {
     FormattedDao,
 } from "../utils/types";
 import { formatTokenAmount } from "../utils/formatters";
-import { useConfig } from "../api/hooks/useConfig";
 
 export const useTokenData = (
     tokenAddress: string
