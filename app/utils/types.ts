@@ -4,7 +4,7 @@ export interface Token {
     name: string;
     decimals: number;
     derivedETH: number;
-    volune: number;
+    volume: number;
 }
 
 export interface TokenInfo extends Token {
