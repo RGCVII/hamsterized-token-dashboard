@@ -1,11 +1,11 @@
 "use client";
 
-import { Token } from "@/app/page";
+import { TokenInfo } from "@/app/utils/types";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
 import React from "react";
 
-const TokenManagement = ({ token }: { token: Token }) => {
+const TokenManagement = ({ token }: { token: TokenInfo }) => {
     const [stakingSelection, setStakingSelection] = React.useState("stake");
 
     const staking = {

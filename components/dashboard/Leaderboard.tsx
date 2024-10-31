@@ -1,4 +1,4 @@
-import { TokenHolder } from "@/app/page";
+import { FormattedMember } from "@/app/utils/types";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const Leaderboard = ({
@@ -6,7 +6,7 @@ const Leaderboard = ({
     tokenHolders,
 }: {
     selectedToken: string;
-    tokenHolders: TokenHolder[];
+    tokenHolders: FormattedMember[];
 }) => {
     return (
         <Card className="bg-gradient-to-b from-[#262f41] to-[#475778] backdrop-blur-sm border-white col-span-2 overflow-y-auto">
@@ -16,35 +16,30 @@ const Leaderboard = ({
                 </CardTitle>
             </CardHeader>
             <CardContent className="flex flex-col font-mono text-sm p-0 rounded-lg text-white">
-                <div className="min-h-[60px] grid grid-cols-[60px_1fr_1fr_1fr_1fr] gap-4 border-b border-white px-6 items-center">
+                <div className="min-h-[60px] grid grid-cols-[60px_1fr_1fr_1fr] gap-4 border-b border-white px-6 items-center">
                     <p>Rank</p>
                     <p>Wallet Address</p>
                     <p>Token Holdings</p>
-                    <p>Staked Amount</p>
                     <p>Voting Participation</p>
                 </div>
-
-                {tokenHolders
-                    .slice()
-                    .sort((a, b) => b.holdings - a.holdings)
-                    .map((holder, i) => (
-                        <div
-                            key={holder.address}
-                            className="min-h-[60px] grid grid-cols-[60px_1fr_1fr_1fr_1fr] gap-4 border-b border-white items-center px-6"
-                        >
-                            <p>{getRankFromIndex(i)}</p>
-                            <p>{holder.address}</p>
-                            <p>
-                                {holder.holdings.toLocaleString()}{" "}
-                                {selectedToken}
-                            </p>
-                            <p>
-                                {holder.stakedAmount.toLocaleString()}{" "}
-                                {selectedToken}
-                            </p>
+                {tokenHolders.map((holder, i) => (
+                    <div
+                        key={holder.memberAddress}
+                        className="min-h-[60px] grid grid-cols-[60px_1fr_1fr_1fr] gap-4 border-b border-white items-center px-6"
+                    >
+                        <p>{getRankFromIndex(i)}</p>
+                        <p>{holder.memberAddress}</p>
+                        <p>
+                            {holder.formattedAmount.toLocaleString()}{" "}
+                            {selectedToken}
+                        </p>
+                        {i !== 0 ? (
                             <p>{holder.votingParticipation}</p>
-                        </div>
-                    ))}
+                        ) : (
+                            <p className="text-rg-red">Locked</p>
+                        )}
+                    </div>
+                ))}
             </CardContent>
         </Card>
     );
