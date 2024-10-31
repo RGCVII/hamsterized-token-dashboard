@@ -3,22 +3,47 @@ export interface Token {
     symbol: string;
     name: string;
     decimals: number;
+    derivedETH: number;
+}
+
+export interface TokenInfo extends Token {
+    price: number;
     totalSupply: string;
-    volume: string;
+    description: string;
+    staked: number;
+    unstaked: number;
+    apr: number;
+    availableHoldings: number;
+}
+
+export interface Bundle {
+    ethPriceUSD: number;
 }
 
 export interface DaoMember {
     memberAddress: string;
     shares: number;
+    votes: { approved: boolean }[];
 }
-
-export interface DaoMembersResponse {
-    members: [DaoMember];
+export interface Dao {
+    totalShares: number;
+    proposalCount: string;
+}
+export interface DaoResponse {
+    dao: Dao;
+    members: DaoMember[];
 }
 export interface TokenResponse {
+    bundle: Bundle;
     token: Token;
 }
 
 export interface FormattedMember extends DaoMember {
     formattedAmount: number;
+    votingParticipation: string;
+}
+
+export interface FormattedDao extends Dao {
+    members: FormattedMember[];
+    formattedTotalShares: string;
 }

@@ -1,11 +1,11 @@
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
-import { getTokenInfo, getTokenBalances } from "../utils/queries";
-import { Token, FormattedMember } from "../utils/types";
+import { getDao, getTokenInfo } from "../utils/queries";
+import { TokenResponse, FormattedMember, FormattedDao } from "../utils/types";
 import { formatTokenAmount } from "../utils/formatters";
 
-export const useTokenInfo = (
+export const useTokenData = (
     tokenAddress: string
-): UseQueryResult<Token, Error> => {
+): UseQueryResult<TokenResponse, Error> => {
     return useQuery({
         queryKey: ["tokenInfo", tokenAddress],
         queryFn: () => getTokenInfo(tokenAddress),
@@ -14,35 +14,42 @@ export const useTokenInfo = (
     });
 };
 
-export const useTokenBalances = (
+export const useDaoData = (
     daoAddress: string,
-    tokenInfo: Token | undefined,
+    tokenData: TokenResponse | undefined,
     limit: number = 10
-): UseQueryResult<FormattedMember[], Error> => {
+): UseQueryResult<FormattedDao, Error> => {
     return useQuery({
         queryKey: ["tokenBalances", daoAddress, limit],
         queryFn: async () => {
-            if (!tokenInfo) {
+            if (!tokenData) {
                 throw new Error("Token info not available");
             }
 
-            const balances = await getTokenBalances(daoAddress);
-
-            const formattedBalances: FormattedMember[] = balances.map(
-                (balance) => ({
-                    ...balance,
+            const daoData = await getDao(daoAddress);
+            const formattedMembers: FormattedMember[] = daoData.members.map(
+                (member) => ({
+                    ...member,
+                    votingParticipation: `${member.votes.length}/${daoData.dao.proposalCount}`,
                     formattedAmount: formatTokenAmount(
-                        balance.shares,
-                        tokenInfo.decimals
+                        member.shares,
+                        tokenData.token.decimals
                     ),
                 })
             );
 
-            return formattedBalances
-                .sort((a, b) => b.formattedAmount - a.formattedAmount)
-                .slice(0, limit);
+            return {
+                ...daoData.dao,
+                formattedTotalShares: formatTokenAmount(
+                    daoData.dao.totalShares,
+                    tokenData.token.decimals
+                ),
+                members: formattedMembers
+                    .sort((a, b) => b.formattedAmount - a.formattedAmount)
+                    .slice(0, limit),
+            };
         },
-        enabled: !!daoAddress && !!tokenInfo,
+        enabled: !!daoAddress && !!tokenData,
         refetchOnWindowFocus: false,
     });
 };

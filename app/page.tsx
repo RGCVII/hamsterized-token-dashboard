@@ -7,7 +7,9 @@ import { TokenLore } from "@/components/dashboard/TokenLore";
 import { TokenManagement } from "@/components/dashboard/TokenManagement";
 import { Leaderboard } from "@/components/dashboard/Leaderboard";
 import { CohortProjects } from "@/components/dashboard/CohortProjects";
-import { useTokenBalances, useTokenInfo } from "./hooks/useTokenData";
+import { LoadingIndicator } from "@/components/ui/LoadingIndicator";
+import { TokenInfo } from "./utils/types";
+import { useDaoData, useTokenData } from "./hooks/useTokenData";
 
 const TOKEN_ADDRESS = "0x11dc980faf34a1d082ae8a6a883db3a950a3c6e8";
 const DAO_ADDRESS = "0x4d5a5b4a679b10038e1677c84cb675d10d29fffd";
@@ -38,21 +40,21 @@ export interface TokenHolder {
 
 export default function Home() {
     const {
-        data: tokenInfo,
+        data: tokenData,
         isLoading: isTokenLoading,
         error: tokenError,
-    } = useTokenInfo(TOKEN_ADDRESS);
+    } = useTokenData(TOKEN_ADDRESS);
 
     const {
-        data: topHolders,
-        isLoading: isBalancesLoading,
-        error: balancesError,
-    } = useTokenBalances(DAO_ADDRESS, tokenInfo, TOP_HOLDERS_LIMIT);
+        data: daoData,
+        isLoading: isDaoLoading,
+        error: DaoError,
+    } = useDaoData(DAO_ADDRESS, tokenData, TOP_HOLDERS_LIMIT);
 
-    if (isTokenLoading || isBalancesLoading) {
-        return <div className="p-4">Loading token information...</div>;
+    if (isTokenLoading || isDaoLoading) {
+        return <LoadingIndicator />;
     }
-    console.log(topHolders, tokenInfo);
+
     if (tokenError) {
         return (
             <div className="p-4 text-red-500">
@@ -61,74 +63,31 @@ export default function Home() {
         );
     }
 
-    if (balancesError) {
+    if (DaoError) {
         return (
             <div className="p-4 text-red-500">
-                Error loading token: {balancesError.message}
+                Error loading Dao: {DaoError.message}
             </div>
         );
     }
 
-    if (!tokenInfo) {
+    if (!tokenData || !daoData) {
         return <div className="p-4">No token information available</div>;
     }
 
     const selectedTokenSymbol = "RGCVII";
 
-    const tokens: Token[] = [
+    const tokens: TokenInfo[] = [
         {
-            name: "RGCVII",
-            symbol: "RGCVII",
-            price: 1234.56,
-            priceChange: 5.67,
-            volume: "45.6M",
-            marketCap: "789.1M",
-            totalSupply: "1,000,000,000",
-            contractAddress: "0x68f2...abc",
+            ...tokenData.token,
+            price: tokenData.token.derivedETH / tokenData.bundle.ethPriceUSD,
+            totalSupply: daoData?.formattedTotalShares,
             description:
                 "In a land ruled by tiny paws, the hamsters empire. With bravery and wit, they sail the Uniswap seas, conquer the Dune Desert, and protect their kingdom through DAOhaus. Join them on their quest to defeat Moloch! In a land ruled by tiny paws, the hamsters empire. With bravery and wit, they sail the Uniswap seas, conquer the Dune Desert, and protect their kingdom through DAOhaus. Join them on their quest to defeat Moloch!",
             staked: 0,
             unstaked: 0,
             apr: 0,
             availableHoldings: 0,
-        },
-    ];
-    const tokenHolders: TokenHolder[] = [
-        {
-            address: "0x68f2...abc",
-            holdings: 55_555,
-            stakedAmount: 0,
-            votingParticipation: "5/12",
-        },
-        {
-            address: "0x78f2...abd",
-            holdings: 123_555,
-            stakedAmount: 120_000,
-            votingParticipation: "12/12",
-        },
-        {
-            address: "0x88f2...abe",
-            holdings: 987_123_555,
-            stakedAmount: 150_000,
-            votingParticipation: "0/12",
-        },
-        {
-            address: "0x98f2...abf",
-            holdings: 10,
-            stakedAmount: 0,
-            votingParticipation: "0/12",
-        },
-        {
-            address: "0x1232...aca",
-            holdings: 1337,
-            stakedAmount: 337,
-            votingParticipation: "3/12",
-        },
-        {
-            address: "0x2132...fcc",
-            holdings: 1_000_000_217,
-            stakedAmount: 1_000_000_217,
-            votingParticipation: "11/12",
         },
     ];
 
@@ -146,7 +105,7 @@ export default function Home() {
                         <TokenManagement token={tokens[0]} />
                         <Leaderboard
                             selectedToken={selectedTokenSymbol}
-                            tokenHolders={tokenHolders}
+                            tokenHolders={daoData?.members}
                         />
                     </div>
                     <CohortProjects />
