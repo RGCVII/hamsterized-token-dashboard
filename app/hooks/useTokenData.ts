@@ -62,6 +62,7 @@ export const useDaoData = (
                     dao.totalShares,
                     tokenData.token.decimals
                 ),
+                holdersCount: dao.members.length,
                 members: formattedMembers
                     .sort((a, b) => b.formattedAmount - a.formattedAmount)
                     .slice(0, limit),

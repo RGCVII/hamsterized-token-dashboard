@@ -4,6 +4,7 @@ export interface Token {
     name: string;
     decimals: number;
     derivedETH: number;
+    volune: number;
 }
 
 export interface TokenInfo extends Token {
@@ -46,4 +47,5 @@ export interface FormattedMember extends DaoMember {
 export interface FormattedDao extends Dao {
     members: FormattedMember[];
     formattedTotalShares: string;
+    holdersCount: number;
 }
