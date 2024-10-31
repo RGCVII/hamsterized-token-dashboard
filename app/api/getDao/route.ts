@@ -32,9 +32,6 @@ export async function GET(request: Request) {
         );
     }
 
-    console.log(`Fetching DAO info for address: ${daoAddress}`);
-    console.log(`GRAPH_DAOHAUS_API_URL: ${GRAPH_DAOHAUS_API_URL}`);
-
     try {
         const response: DaoResponse = await graphqlRequest(
             GRAPH_DAOHAUS_API_URL,
