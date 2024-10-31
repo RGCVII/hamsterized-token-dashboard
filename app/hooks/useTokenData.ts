@@ -1,14 +1,28 @@
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
-import { getDao, getTokenInfo } from "../utils/queries";
-import { TokenResponse, FormattedMember, FormattedDao } from "../utils/types";
+import {
+    TokenResponse,
+    DaoResponse,
+    FormattedMember,
+    FormattedDao,
+} from "../utils/types";
 import { formatTokenAmount } from "../utils/formatters";
+import { useConfig } from "../api/hooks/useConfig";
 
 export const useTokenData = (
     tokenAddress: string
 ): UseQueryResult<TokenResponse, Error> => {
     return useQuery({
         queryKey: ["tokenInfo", tokenAddress],
-        queryFn: () => getTokenInfo(tokenAddress),
+        queryFn: async () => {
+            const response = await fetch(
+                `/api/getTokenInfo?tokenAddress=${tokenAddress}`
+            );
+            if (!response.ok) {
+                throw new Error("Failed to fetch token info");
+            }
+            const data: TokenResponse = await response.json();
+            return data;
+        },
         enabled: !!tokenAddress,
         refetchOnWindowFocus: false,
     });
@@ -26,7 +40,14 @@ export const useDaoData = (
                 throw new Error("Token info not available");
             }
 
-            const daoData = await getDao(daoAddress);
+            const response = await fetch(
+                `/api/getDao?daoAddress=${daoAddress}`
+            );
+            if (!response.ok) {
+                throw new Error("Failed to fetch DAO info");
+            }
+            const daoData: DaoResponse = await response.json();
+
             const formattedMembers: FormattedMember[] = daoData.members.map(
                 (member) => ({
                     ...member,

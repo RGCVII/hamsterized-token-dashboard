@@ -47,7 +47,7 @@ const Leaderboard = ({
 
 export { Leaderboard };
 
-function getRankFromIndex(i) {
+function getRankFromIndex(i: number) {
     return new Intl.PluralRules("en", {
         type: "ordinal",
     }).select(i + 1) === "one"

@@ -131,7 +131,7 @@ export default function Home() {
                 >
                     <Image
                         aria-hidden
-                        src="/Github_Invertocat_Light.png"
+                        src="/GitHub_Invertocat_Light.png"
                         alt="Github icon"
                         width={32}
                         height={32}
