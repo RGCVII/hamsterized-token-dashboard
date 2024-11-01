@@ -18,9 +18,18 @@ export default function Home() {
             <main className="flex-1 bg-gradient-to-r from-[#1A202C] to-[#40557b]">
                 <div className="container mx-auto flex flex-col gap-4 h-full">
                     <div className="flex flex-row justify-between items-center mt-24 mb-8">
-                        <h1 className="text-6xl text-rg-red font-serif">
-                            RGC Token Dashboard
-                        </h1>
+                        <div className="flex gap-4">
+                            <Image
+                                aria-hidden
+                                src="/RG-logo.png"
+                                alt="Raid Guild icon"
+                                width={60}
+                                height={60}
+                            />
+                            <h1 className="text-6xl text-rg-red font-serif">
+                                RGCohortVII
+                          </h1>
+                        </div>
                         <ClientWalletButton />
                     </div>
                     <Dashboard />
