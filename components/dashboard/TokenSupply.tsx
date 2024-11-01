@@ -7,7 +7,6 @@ import * as Tooltip from "@radix-ui/react-tooltip";
 import { useState } from "react";
 import { TOKEN_ADDRESS } from "./Dashboard";
 
-/* eslint-disable */
 const TokenSupply = ({
     tokens,
     chartData,
@@ -161,11 +160,9 @@ const TokenSupply = ({
         </Card>
     );
 };
-/* eslint-enable */
 
 export { TokenSupply };
 
-/* eslint-disable */
 const getFormattedChartData = (
     chartData: Record<string, any>,
     selectedChart: string
@@ -181,4 +178,3 @@ const getFormattedChartData = (
         return { id: label, label, value }; // color };
     });
 };
-/* eslint-enable */
