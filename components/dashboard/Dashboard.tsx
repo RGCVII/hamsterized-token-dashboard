@@ -56,11 +56,13 @@ export default function Dashboard() {
             ...tokenData.token,
             price: tokenData.token.derivedETH * tokenData.bundle.ethPriceUSD,
 
-            totalSupply: daoData?.formattedTotalShares,
+            totalSupply: daoData?.formattedTotalShares || "0",
             description:
                 "In a land ruled by tiny paws, the hamsters empire. With bravery and wit, they sail the Uniswap seas, conquer the Dune Desert, and protect their kingdom through DAOhaus. Join them on their quest to defeat Moloch! In a land ruled by tiny paws, the hamsters empire. With bravery and wit, they sail the Uniswap seas, conquer the Dune Desert, and protect their kingdom through DAOhaus. Join them on their quest to defeat Moloch!",
             staked: 0,
-            unstaked: 0,
+            unstaked: daoData?.formattedTotalShares
+                ? parseInt(daoData.formattedTotalShares)
+                : 0,
             apr: 0,
             availableHoldings: 0,
         },
