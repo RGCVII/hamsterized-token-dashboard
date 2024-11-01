@@ -91,7 +91,7 @@ export default function Dashboard() {
     };
 
     return (
-        <div className="grid grid-cols-3 gap-4 auto-rows-[400px]">
+        <div className="grid grid-cols-3 gap-4 auto-rows-[450px]">
             <TokenSupply
                 tokens={tokens}
                 daoData={daoData}

@@ -83,7 +83,7 @@ const TokenManagement = ({ token }: { token: TokenInfo }) => {
                         </div>
                     </div>
 
-                    <div className="rounded-lg border border-[#e4e4e7] p-4 mt-4">
+                    <div className="p-4 mt-8">
                         <div className="border border-[#e4e4e7] rounded-2xl">
                             <div className="flex flex-row justify-between items-center p-1">
                                 <div className="flex flex-row items-center">
@@ -136,7 +136,7 @@ const TokenManagement = ({ token }: { token: TokenInfo }) => {
                     </div>
                 </div>
 
-                <div className="flex flex-col justify-center py-4 text-white">
+                <div className="flex flex-col justify-center py-12 text-white">
                     <div className="flex flex-row justify-between items-center">
                         <span className="text-xl font-serif text-rg-red">
                             Statistics
@@ -159,10 +159,10 @@ const TokenManagement = ({ token }: { token: TokenInfo }) => {
                             % Unstaked
                         </span>
                     </div>
-                    <div className="flex justify-center items-center py-2 h-[130px] w-full">
+                    <div className="flex justify-center items-center py-2 h-[160px] w-full">
                         <ResponsivePie
                             data={getFormattedChartData(stakedChartData)}
-                            colors={{ scheme: "spectral" }}
+                            colors={{ scheme: "set2" }}
                             margin={{
                                 top: 30,
                                 right: 50,

@@ -68,7 +68,7 @@ const CohortProjects = () => {
                                 <p className="text-white text-lg">
                                     {project.name}
                                 </p>
-                                <ChevronDown size={32} color="#FF3864" />
+                                <ChevronDown size={32} color="#2A9D90" />
                             </div>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent className="w-96">
