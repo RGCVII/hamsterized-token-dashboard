@@ -5,9 +5,12 @@ import Dashboard from "@/components/dashboard/Dashboard";
 import { CohortProjects } from "@/components/dashboard/CohortProjects";
 
 // Dynamically import the ClientWalletButton with no SSR
-const ClientWalletButton = dynamic(() => import("../components/dashboard/ClientWalletButton"), {
-  ssr: false,
-});
+const ClientWalletButton = dynamic(
+    () => import("../components/dashboard/ClientWalletButton"),
+    {
+        ssr: false,
+    }
+);
 
 export default function Home() {
     return (
@@ -19,7 +22,7 @@ export default function Home() {
                             RGC Token Dashboard
                         </h1>
                         <ClientWalletButton />
-                    </div>                  
+                    </div>
                     <Dashboard />
                     <CohortProjects />
                 </div>
