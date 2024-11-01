@@ -26,7 +26,8 @@ const TokenSupply = ({
         <Card className="bg-gradient-to-b from-[#262f41] to-[#475778] backdrop-blur-sm border-white">
             <CardHeader className="flex flex-row items-center justify-between border-b border-white p-5">
                 <CardTitle className="w-full text-2xl font-serif text-rg-red">
-                    Total Supply
+                    <p>Token</p>
+                    <p>Supply</p>
                 </CardTitle>
             </CardHeader>
             <CardContent className="flex flex-col gap-4">
@@ -40,13 +41,13 @@ const TokenSupply = ({
                     <div className="flex flex-row justify-between items-center py-1">
                         <p className="text-sm text-white">Volume</p>
                         <p className="text-xl font-serif text-rg-red">
-                            {tokens?.[0]?.volume?.toLocaleString() || "-"}
+                            {tokens?.[0]?.volume?.toLocaleString().slice(0, 8) || "-"}
                         </p>
                     </div>
                     <div className="flex flex-row justify-between items-center py-1">
-                        <p className="text-sm text-white">Amount of Holders</p>
+                        <p className="text-sm text-white">Number of Holders</p>
                         <p className="text-xl font-serif text-rg-red">
-                            {daoData?.members?.length?.toLocaleString() || "-"}
+                            {daoData?.holdersCount.toLocaleString() || "-"}
                         </p>
                     </div>
                     <div className="flex flex-row justify-between items-center py-1">
@@ -77,10 +78,10 @@ const TokenSupply = ({
                 </div>
 
                 <div className="flex flex-col">
-                    <div className="flex flex-row justify-between text-white text-xs">
-                        <p className="text-base text-rg-red font-serif">
+                    <div className="flex flex-row justify-around text-white text-xs pt-5">
+                        {/* <p className="text-base text-rg-red font-serif">
                             Charts
-                        </p>
+                        </p> */}
                         <label
                             className={`py-1 ${
                                 selectedChart === "tokens-burned"
@@ -123,7 +124,7 @@ const TokenSupply = ({
                                 chartData,
                                 selectedChart
                             )}
-                            colors={{ scheme: "spectral" }}
+                            colors={{ scheme: "set2" }}
                             margin={{
                                 top: 30,
                                 right: 50,
