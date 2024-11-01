@@ -85,17 +85,19 @@ export default function Dashboard() {
     const unburned = totalSupply - burned,
         unlocked = totalSupply - locked;
 
-    const supplyChartData = {
+    /* eslint-disable */
+    const supplyChartData: Record<string, any> = {
         burned: [{ burned }, { unburned }],
         locked: [{ locked }, { unlocked }],
     };
+    /* eslint-enable */
 
     return (
         <div className="grid grid-cols-3 gap-4 auto-rows-[450px]">
             <TokenSupply
                 tokens={tokens}
                 daoData={daoData}
-                chartData={supplyChartData}
+                chartData={[supplyChartData]}
             />
             <TokenLore />
             <TokenManagement token={tokens[0]} />

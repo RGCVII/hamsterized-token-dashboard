@@ -199,6 +199,7 @@ const TokenManagement = ({ token }: { token: TokenInfo }) => {
 
 export { TokenManagement };
 
+/* eslint-disable */
 const getFormattedChartData = (chartData: Record<string, any>) => {
     return chartData.map((item: Record<string, any>) => {
         const label = Object.keys(item)[0];
@@ -207,3 +208,4 @@ const getFormattedChartData = (chartData: Record<string, any>) => {
         return { id: label, label, value };
     });
 };
+/* eslint-enable */

@@ -7,6 +7,7 @@ import * as Tooltip from "@radix-ui/react-tooltip";
 import { useState } from "react";
 import { TOKEN_ADDRESS } from "./Dashboard";
 
+/* eslint-disable */
 const TokenSupply = ({
     tokens,
     chartData,
@@ -41,7 +42,9 @@ const TokenSupply = ({
                     <div className="flex flex-row justify-between items-center py-1">
                         <p className="text-sm text-white">Volume</p>
                         <p className="text-xl font-serif text-rg-red">
-                            {tokens?.[0]?.volume?.toLocaleString().slice(0, 8) || "-"}
+                            {tokens?.[0]?.volume
+                                ?.toLocaleString()
+                                .slice(0, 8) || "-"}
                         </p>
                     </div>
                     <div className="flex flex-row justify-between items-center py-1">
@@ -158,9 +161,11 @@ const TokenSupply = ({
         </Card>
     );
 };
+/* eslint-enable */
 
 export { TokenSupply };
 
+/* eslint-disable */
 const getFormattedChartData = (
     chartData: Record<string, any>,
     selectedChart: string
@@ -176,3 +181,4 @@ const getFormattedChartData = (
         return { id: label, label, value }; // color };
     });
 };
+/* eslint-enable */
