@@ -2,6 +2,7 @@
 
 import { TokenInfo } from "@/app/utils/types";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ResponsivePie } from "@nivo/pie";
 import Image from "next/image";
 import React from "react";
 
@@ -18,6 +19,11 @@ const TokenManagement = ({ token }: { token: TokenInfo }) => {
     function stakeTokens() {
         console.log("NOT IMPLEMENTED");
     }
+
+    const stakedChartData = [
+        { staked: token?.staked },
+        { unstaked: token?.unstaked },
+    ];
 
     return (
         <Card className="bg-gradient-to-b from-[#262f41] to-[#475778] backdrop-blur-sm border-white row-span-2">
@@ -127,32 +133,63 @@ const TokenManagement = ({ token }: { token: TokenInfo }) => {
                         >
                             Stake
                         </button>
-                        <div className="text-xs text-center">
-                            Info? *Missing if need*
-                        </div>
                     </div>
                 </div>
 
-                <div className="flex flex-col justify-center text-white">
-                    <div className="flex flex-row justify-between border-b border-white gap-4 py-4">
-                        <div className="flex flex-col justify-center text-white">
-                            <span className="text-xl font-serif text-rg-red">
-                                Statistics
-                            </span>
-                            <span className="text-sm py-2">
-                                {token.staked}% Staked
-                            </span>
-                            <span className="text-sm py-2">
-                                {token.unstaked}% Unstaked
-                            </span>
-                        </div>
-                        <div className="flex justify-center items-center w-full">
-                            Chart
-                        </div>
+                <div className="flex flex-col justify-center py-4 text-white">
+                    <div className="flex flex-row justify-between items-center">
+                        <span className="text-xl font-serif text-rg-red">
+                            Statistics
+                        </span>
+                        <span className="text-xs">
+                            {typeof token?.totalSupply !== "undefined" &&
+                            typeof token?.staked !== "undefined"
+                                ? (token.staked / parseInt(token.totalSupply)) *
+                                  100
+                                : "-"}
+                            % Staked
+                        </span>
+                        <span className="text-xs">
+                            {typeof token?.totalSupply !== "undefined" &&
+                            typeof token?.unstaked !== "undefined"
+                                ? (token.unstaked /
+                                      parseInt(token.totalSupply)) *
+                                  100
+                                : "-"}
+                            % Unstaked
+                        </span>
                     </div>
-
-                    <div className="text-xs text-center py-4">
-                        Info? *Missing if need*
+                    <div className="flex justify-center items-center py-2 h-[130px] w-full">
+                        <ResponsivePie
+                            data={getFormattedChartData(stakedChartData)}
+                            colors={{ scheme: "spectral" }}
+                            margin={{
+                                top: 30,
+                                right: 50,
+                                bottom: 5,
+                                left: 50,
+                            }}
+                            startAngle={-90}
+                            endAngle={90}
+                            innerRadius={0.5}
+                            padAngle={2}
+                            cornerRadius={7}
+                            activeOuterRadiusOffset={2}
+                            borderWidth={1}
+                            borderColor={{
+                                from: "color",
+                                modifiers: [["brighter", 0.2]],
+                            }}
+                            arcLinkLabelsSkipAngle={2}
+                            arcLinkLabelsTextColor="#fff"
+                            arcLinkLabelsOffset={-1}
+                            arcLinkLabelsStraightLength={4}
+                            arcLinkLabelsThickness={2}
+                            arcLinkLabelsColor="#fff"
+                            arcLabelsSkipAngle={10}
+                            arcLabelsTextColor="#fff"
+                            valueFormat=" >-,r"
+                        />
                     </div>
                 </div>
             </CardContent>
@@ -161,3 +198,12 @@ const TokenManagement = ({ token }: { token: TokenInfo }) => {
 };
 
 export { TokenManagement };
+
+const getFormattedChartData = (chartData: Record<string, any>) => {
+    return chartData.map((item: Record<string, any>) => {
+        const label = Object.keys(item)[0];
+        const value = Object.values(item)[0];
+
+        return { id: label, label, value };
+    });
+};

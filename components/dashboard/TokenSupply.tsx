@@ -55,11 +55,11 @@ const TokenSupply = ({
                             <Tooltip.Provider>
                                 <Tooltip.Root>
                                     <Tooltip.Trigger asChild>
-                                        <p className="text-xl font-serif text-rg-red truncate text-ellipsis max-w-[200px] break-all">
+                                        <span className="text-xl font-serif text-rg-red truncate text-ellipsis max-w-[200px] break-all">
                                             {TOKEN_ADDRESS.slice(0, 6) +
                                                 "..." +
                                                 TOKEN_ADDRESS.slice(-4)}
-                                        </p>
+                                        </span>
                                     </Tooltip.Trigger>
                                     <Tooltip.Portal>
                                         <Tooltip.Content
