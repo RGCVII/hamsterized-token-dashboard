@@ -13,7 +13,7 @@ const TokenSupply = ({
     daoData,
 }: {
     tokens: TokenInfo[];
-    chartData: Record<string, any>[];
+    chartData: Record<string, any>;
     daoData: FormattedDao;
 }) => {
     const [selectedChart, setSelectedChart] = useState("tokens-burned");
@@ -41,7 +41,9 @@ const TokenSupply = ({
                     <div className="flex flex-row justify-between items-center py-1">
                         <p className="text-sm text-white">Volume</p>
                         <p className="text-xl font-serif text-rg-red">
-                            {tokens?.[0]?.volume?.toLocaleString().slice(0, 8) || "-"}
+                            {tokens?.[0]?.volume
+                                ?.toLocaleString()
+                                .slice(0, 8) || "-"}
                         </p>
                     </div>
                     <div className="flex flex-row justify-between items-center py-1">
