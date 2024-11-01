@@ -13,7 +13,7 @@ const TokenSupply = ({
     daoData,
 }: {
     tokens: TokenInfo[];
-    chartData: Record<string, any>[];
+    chartData: Record<string, any>;
     daoData: FormattedDao;
 }) => {
     const [selectedChart, setSelectedChart] = useState("tokens-burned");
