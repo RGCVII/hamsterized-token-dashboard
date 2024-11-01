@@ -94,7 +94,13 @@ export default function Dashboard() {
         : 0;
 
     const burned = totalSupply * 0.3,
-        locked = totalSupply * 0.2;
+        locked = daoData?.members?.reduce(
+            (highest, member) =>
+                member.formattedAmount > highest.formattedAmount
+                    ? member
+                    : highest,
+            daoData.members[0]
+        )?.formattedAmount;
 
     const unburned = totalSupply - burned,
         unlocked = totalSupply - locked;
