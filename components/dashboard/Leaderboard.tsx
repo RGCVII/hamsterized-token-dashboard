@@ -15,7 +15,7 @@ const Leaderboard = ({
                     Leaderboard
                 </CardTitle>
             </CardHeader>
-            <CardContent className="flex flex-col font-mono text-sm p-0 rounded-lg text-white">
+            <CardContent className="flex flex-col text-sm p-0 rounded-lg text-white">
                 <div className="min-h-[60px] grid grid-cols-[60px_1fr_1fr_1fr] gap-4 border-b border-white px-6 items-center">
                     <p>Rank</p>
                     <p>Wallet Address</p>
@@ -28,7 +28,7 @@ const Leaderboard = ({
                         className="min-h-[60px] grid grid-cols-[60px_1fr_1fr_1fr] gap-4 border-b border-white items-center px-6"
                     >
                         <p>{getRankFromIndex(i)}</p>
-                        <p>{holder.memberAddress}</p>
+                        <p>{holder.memberAddress.slice(0,10)}.....{holder.memberAddress.slice(-4)}</p>
                         <p>
                             {holder.formattedAmount.toLocaleString()}{" "}
                             {selectedToken}

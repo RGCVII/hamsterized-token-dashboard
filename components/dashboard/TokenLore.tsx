@@ -7,7 +7,8 @@ const TokenLore = () => {
         <Card className="bg-gradient-to-t from-[#262f41] to-[#475778] backdrop-blur-sm border-white pb-4">
             <CardHeader className="flex flex-row items-center justify-between border-b border-white p-5">
                 <CardTitle className="w-full text-2xl font-serif text-rg-red">
-                    Hamsterverse Lore
+                    <p>Enter the</p>
+                    <p>Hamsterverse</p>
                 </CardTitle>
             </CardHeader>
             <CardContent className="flex flex-col gap-8 pt-8">
